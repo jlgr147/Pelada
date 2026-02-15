@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pelada Feliz Día 💜</title>
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #2a003f, #5e17eb, #a855f7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+    color: white;
+    text-align: center;
+}
+
+/* Pantalla inicial */
+.inicio {
+    position: absolute;
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 18px;
+    background: #d633ff;
+    border: none;
+    border-radius: 30px;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 0 20px #d633ff;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 40px #fff;
+}
+
+/* Contenido */
+.contenido {
+    display: none;
+    background: rgba(255,255,255,0.1);
+    padding: 30px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 40px rgba(255,255,255,0.3);
+}
+
+h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+#mensaje {
+    font-size: 20px;
+    min-height: 100px;
+}
+
+/* Corazones */
+.corazon {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #d633ff;
+    transform: rotate(45deg);
+    animation: flotar linear infinite;
+}
+
+.corazon::before,
+.corazon::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #d633ff;
+    border-radius: 50%;
+}
+
+.corazon::before { top: -10px; left: 0; }
+.corazon::after { left: -10px; top: 0; }
+
+@keyframes flotar {
+    0% { bottom: -10px; opacity: 1; }
+    100% { bottom: 100%; opacity: 0; transform: translateX(80px) rotate(45deg); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="inicio">
+    <button onclick="mostrarMensaje()">💜 Toca aquí pelada 💜</button>
+</div>
+
+<div class="contenido" id="contenido">
+    <h1>💜 Pelada Feliz Día 💜</h1>
+    <p id="mensaje"></p>
+</div>
+
+<script>
+
+function mostrarMensaje() {
+    document.querySelector('.inicio').style.display = "none";
+    document.getElementById('contenido').style.display = "block";
+    escribirTexto();
+    setInterval(crearCorazon, 300);
+}
+
+const texto = "Pelada te adoro con todo mi corazón 💜\nTe deseo un feliz día de San Valentín.\nNunca olvides que te quiero mucho.";
+
+let i = 0;
+
+function escribirTexto() {
+    if (i < texto.length) {
+        document.getElementById("mensaje").innerHTML += texto.charAt(i) === "\n" ? "<br>" : texto.charAt(i);
+        i++;
+        setTimeout(escribirTexto, 50);
+    }
+}
+
+function crearCorazon() {
+    const corazon = document.createElement("div");
+    corazon.classList.add("corazon");
+    corazon.style.left = Math.random() * 100 + "vw";
+    corazon.style.animationDuration = (Math.random() * 3 + 4) + "s";
+    document.body.appendChild(corazon);
+
+    setTimeout(() => {
+        corazon.remove();
+    }, 7000);
+}
+
+</script>
+
+</body>
+</html>
